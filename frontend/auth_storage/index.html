@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script>
+      function sendValue(value) {
+        window.parent.postMessage({
+          isStreamlitMessage: true,
+          type: "streamlit:setComponentValue",
+          value: value
+        }, "*");
+      }
+
+      window.addEventListener("message", function (event) {
+        const message = event.data;
+        if (!message || message.type !== "streamlit:render") return;
+
+        const args = message.args || {};
+        const action = args.action || "read";
+        const key = "nova-ai-auth-token";
+        let token = null;
+
+        try {
+          if (action === "write" && args.token) {
+            window.localStorage.setItem(key, args.token);
+            token = args.token;
+          } else if (action === "clear") {
+            window.localStorage.removeItem(key);
+          } else {
+            token = window.localStorage.getItem(key);
+          }
+          sendValue({ready: true, action: action, token: token});
+        } catch (_error) {
+          sendValue({ready: false, action: action, token: null});
+        }
+      });
+
+      window.parent.postMessage({
+        isStreamlitMessage: true,
+        type: "streamlit:componentReady",
+        apiVersion: 1
+      }, "*");
+      window.parent.postMessage({
+        isStreamlitMessage: true,
+        type: "streamlit:setFrameHeight",
+        height: 0
+      }, "*");
+    </script>
+  </head>
+  <body></body>
+</html>

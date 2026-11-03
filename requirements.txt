@@ -1,0 +1,12 @@
+# Runtime dependencies (versions installed and tested for this project)
+fastapi==0.162.0
+uvicorn==0.54.0
+google-genai==2.34.0
+python-dotenv==1.2.4
+streamlit==1.66.1
+httpx==0.28.1
+bcrypt==5.0.0
+pydantic==2.14.2
+
+# Test dependency
+pytest==9.2.0
