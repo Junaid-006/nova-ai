@@ -7,6 +7,12 @@ a Streamlit frontend. It uses Google's Gemini models, persists conversations
 in SQLite, and maintains older conversation context through incremental
 summaries.
 
+## Application Preview
+
+![Nova AI Application Preview](docs/images/nova-ai-preview.png)
+
+*Nova AI — Your thoughtful AI companion.*
+
 ## Features
 
 - Dark-themed Streamlit chat interface with conversation history.
